@@ -8,55 +8,6 @@ include "config.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-
-<script>
-// Demander la permission pour les notifications
-if ('Notification' in window && 'serviceWorker' in navigator) {
-    if (Notification.permission === 'default') {
-        Notification.requestPermission();
-    }
-}
-
-// Vérifier les nouvelles commandes toutes les 30 secondes
-let dernierID = 0;
-
-function verifierNouvellesCommandes() {
-    fetch('check_nouvelles_commandes.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.nouvelle_commande && data.derniere_commande_id > dernierID) {
-                dernierID = data.derniere_commande_id;
-                
-                // Envoyer la notification
-                if (Notification.permission === 'granted') {
-                    new Notification('🟢 Nouvelle commande My BredExpress !', {
-                        body: `${data.nom_client} - ${data.quantite} ${data.type_pain}\nTotal: ${data.total} FCFA`,
-                        icon: 'founder.jpg',
-                        badge: 'founder.jpg',
-                        vibrate: [200, 100, 200]
-                    });
-                    
-                    // Recharger la page pour afficher la nouvelle commande
-                    location.reload();
-                }
-            }
-        })
-        .catch(error => console.error('Erreur:', error));
-}
-
-// Initialiser
-fetch('check_nouvelles_commandes.php')
-    .then(response => response.json())
-    .then(data => {
-        if (data.derniere_commande_id) {
-            dernierID = data.derniere_commande_id;
-        }
-    });
-
-// Vérifier toutes les 30 secondes
-setInterval(verifierNouvellesCommandes, 30000);
-</script>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,6 +23,55 @@ setInterval(verifierNouvellesCommandes, 30000);
         button:hover{background:#b84300;}
         @media(max-width:768px){table{display:block;overflow-x:auto;}}
     </style>
+    
+    <script>
+    // Demander la permission pour les notifications
+    if ('Notification' in window) {
+        if (Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
+    }
+
+    // Vérifier les nouvelles commandes toutes les 30 secondes
+    let dernierID = 0;
+
+    function verifierNouvellesCommandes() {
+        fetch('check_nouvelles_commandes.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.nouvelle_commande && data.derniere_commande_id > dernierID) {
+                    dernierID = data.derniere_commande_id;
+                    
+                    // Envoyer la notification
+                    if (Notification.permission === 'granted') {
+                        new Notification('🟢 Nouvelle commande My BredExpress !', {
+                            body: `${data.nom_client} - ${data.quantite} ${data.type_pain}\nTotal: ${data.total} FCFA`,
+                            icon: 'founder.jpg',
+                            vibrate: [200, 100, 200]
+                        });
+                        
+                        // Recharger la page pour afficher la nouvelle commande
+                        setTimeout(() => location.reload(), 2000);
+                    }
+                }
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
+
+    // Initialiser le dernier ID au chargement
+    window.addEventListener('load', function() {
+        fetch('check_nouvelles_commandes.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.derniere_commande_id) {
+                    dernierID = data.derniere_commande_id;
+                }
+            });
+        
+        // Vérifier toutes les 30 secondes
+        setInterval(verifierNouvellesCommandes, 30000);
+    });
+    </script>
 </head>
 <body>
 <header style="text-align:center;background:#d35400;color:white;padding:20px;">
