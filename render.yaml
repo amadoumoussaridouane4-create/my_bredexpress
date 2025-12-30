@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: my-bredexpress
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: my-bredexpress-db
+          property: connectionString
