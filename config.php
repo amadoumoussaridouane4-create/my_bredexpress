@@ -5,7 +5,7 @@ $DATABASE_URL = getenv('DATABASE_URL') ?: 'postgresql://mybredexpress_user:FrQnr
 $db = parse_url($DATABASE_URL);
 
 $host = $db['host'];
-$port = $db['port'];
+$port = isset($db['port']) ? $db['port'] : 5432; // Port par défaut
 $dbname = ltrim($db['path'], '/');
 $username = $db['user'];
 $password = $db['pass'];
