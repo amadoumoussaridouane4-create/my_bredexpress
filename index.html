@@ -98,7 +98,13 @@
 <option>Pain rond</option>
 </select>
 <input type="number" name="qte" min="1" placeholder="Quantité" required>
-<textarea name="adresse" placeholder="Adresse de livraison précise (quartier, rue, point de repère)" rows="3" required></textarea>
+<div style="position:relative;">
+    <textarea name="adresse" id="adresse" placeholder="Adresse de livraison (ou utilisez votre position GPS)" rows="2" required></textarea>
+    <input type="hidden" name="latitude" id="latitude" value="">
+    <input type="hidden" name="longitude" id="longitude" value="">
+    <button type="button" onclick="getLocation()" style="margin-top:10px;background:#27ae60;width:auto;padding:12px 20px;font-size:1rem;">📍 Utiliser ma position GPS</button>
+    <p id="status" style="font-size:0.9rem;color:#666;margin-top:5px;"></p>
+</div>
 <div style="background:#fff8f0;padding:15px;border-radius:8px;margin:15px 0;text-align:center;">
 <p style="margin:5px 0;color:#d35400;font-weight:bold;">💰 Prix : 200 FCFA/pain + 300 FCFA de livraison</p>
 <p style="margin:5px 0;font-size:0.9rem;color:#666;">💵 Paiement à la livraison</p>
@@ -148,5 +154,51 @@ Passionné par l'innovation et le service client, j'ai créé My BreadExpress po
 <p>&copy; 2025 My BreadExpress - La livraison de pain révolutionnaire au Niger</p>
 <p style="margin-top:10px;font-size:0.9rem;">Fondé par Amadou Moussa Ridouane • Technicien Supérieur en Génie Logiciel à EMIG</p>
 </footer>
+<script>
+function getLocation() {
+    const status = document.getElementById('status');
+    
+    if (!navigator.geolocation) {
+        status.textContent = '❌ La géolocalisation n\'est pas supportée par votre navigateur';
+        status.style.color = '#e74c3c';
+        return;
+    }
+    
+    status.textContent = '📡 Récupération de votre position...';
+    status.style.color = '#f39c12';
+    
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lon;
+            document.getElementById('adresse').value = `📍 Position GPS : ${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+            
+            status.textContent = '✅ Position récupérée avec succès !';
+            status.style.color = '#27ae60';
+        },
+        function(error) {
+            let errorMsg = '';
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMsg = '❌ Vous avez refusé l\'accès à votre position';
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorMsg = '❌ Position indisponible';
+                    break;
+                case error.TIMEOUT:
+                    errorMsg = '❌ Délai d\'attente dépassé';
+                    break;
+                default:
+                    errorMsg = '❌ Erreur inconnue';
+            }
+            status.textContent = errorMsg;
+            status.style.color = '#e74c3c';
+        }
+    );
+}
+</script>
 </body>
 </html>

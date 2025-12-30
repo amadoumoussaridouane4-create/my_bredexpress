@@ -7,6 +7,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pain = trim($_POST['pain']);
     $qte = (int)$_POST['qte'];
     $adresse = trim($_POST['adresse']);
+    $latitude = isset($_POST['latitude']) ? trim($_POST['latitude']) : '';
+    $longitude = isset($_POST['longitude']) ? trim($_POST['longitude']) : '';
     
     $prix_unitaire = 200;
     $frais_livraison = 300;
@@ -28,9 +30,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $stmt->execute();
         
-        $message = urlencode("NOUVELLE COMMANDE - My BredExpress. Client : $nom. Tel : $tel. Pain : $pain. Quantite : $qte. Total : $total FCFA. Adresse : $adresse");
+        // Construire le message avec coordonnées GPS si disponibles
+        $message = "🟢 NOUVELLE COMMANDE - My BredExpress\n";
+        $message .= "👤 Client : $nom\n";
+        $message .= "📞 Tel : $tel\n";
+        $message .= "🥖 Pain : $pain\n";
+        $message .= "🔢 Quantité : $qte\n";
+        $message .= "💰 Total : $total FCFA (Pain: $total_pain + Livraison: $frais_livraison)\n";
+        $message .= "📍 Adresse : $adresse\n";
         
-        header("Location: https://wa.me/22789450364?text=" . $message);
+        // Ajouter lien Google Maps si GPS disponible
+        if (!empty($latitude) && !empty($longitude)) {
+            $message .= "🗺️ Localisation GPS : https://www.google.com/maps?q=$latitude,$longitude\n";
+        }
+        
+        $message .= "💵 Paiement : À la livraison";
+        
+        $encodedMessage = urlencode($message);
+        
+        header("Location: https://wa.me/22789450364?text=" . $encodedMessage);
         exit();
     } catch(PDOException $e) {
         echo "Erreur : " . $e->getMessage();
@@ -39,3 +57,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: index.html");
     exit();
 }
+?>
