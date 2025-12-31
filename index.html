@@ -112,7 +112,7 @@
 <p style="text-align:center;color:#666;margin-bottom:20px;">Remplissez le formulaire ci-dessous et recevez votre pain en moins de 30 minutes !</p>
 <form action="commande.php" method="POST">
 <input type="text" name="nom" placeholder="Nom complet" required>
-<input type="tel" name="tel" placeholder="Téléphone (ex: 89450364)" required>
+<input type="tel" name="tel" pattern="[897][0-9]{7}" maxlength="8" title="Numéro Niger : 8 chiffres commençant par 8, 9 ou 7" placeholder="Ex: 89450364" required>
 <select name="pain" required>
     <option value="">-- Choisissez votre pain --</option>
     <option>Baguette</option>
