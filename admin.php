@@ -97,6 +97,7 @@ try {
         <th>Pain</th>
         <th>Qté</th>
         <th>Adresse</th>
+        <th>GPS</th>
         <th>Prix Pain</th>
         <th>Frais Livraison</th>
         <th>Total</th>
@@ -111,6 +112,13 @@ try {
         <td><?= htmlspecialchars($row['type_pain']) ?></td>
         <td><?= htmlspecialchars($row['quantite']) ?></td>
         <td><?= htmlspecialchars($row['adresse']) ?></td>
+        <td>
+            <?php if (!empty($row['latitude']) && !empty($row['longitude'])): ?>
+                <a href="https://www.google.com/maps?q=<?= htmlspecialchars($row['latitude']) ?>,<?= htmlspecialchars($row['longitude']) ?>" target="_blank">Voir</a>
+            <?php else: ?>
+                N/A
+            <?php endif; ?>
+        </td>   
         <td><?= htmlspecialchars($row['prix_unitaire']) ?></td>
         <td><?= htmlspecialchars($row['frais_livraison']) ?></td>
         <td><?= htmlspecialchars($row['total']) ?></td>

@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $total = $total_pain + $frais_livraison;
     
     try {
-        $sql = "INSERT INTO commandes (nom_client, telephone, type_pain, quantite, adresse, prix_unitaire, frais_livraison, total) VALUES (:nom, :tel, :pain, :qte, :adresse, :prix_unitaire, :frais_livraison, :total)";
+        $sql = "INSERT INTO commandes (nom_client, telephone, type_pain, quantite, adresse, latitude, longitude, prix_unitaire, frais_livraison, total) VALUES (:nom, :tel, :pain, :qte, :adresse, :latitude, :longitude, :prix_unitaire, :frais_livraison, :total)";
         $stmt = $conn->prepare($sql);
         
         $stmt->bindParam(':nom', $nom);
@@ -24,6 +24,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':pain', $pain);
         $stmt->bindParam(':qte', $qte, PDO::PARAM_INT);
         $stmt->bindParam(':adresse', $adresse);
+        $stmt->bindParam(':latitude', $latitude);
+        $stmt->bindParam(':longitude', $longitude);
         $stmt->bindParam(':prix_unitaire', $prix_unitaire, PDO::PARAM_INT);
         $stmt->bindParam(':frais_livraison', $frais_livraison, PDO::PARAM_INT);
         $stmt->bindParam(':total', $total, PDO::PARAM_INT);
