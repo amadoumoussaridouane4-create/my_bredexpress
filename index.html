@@ -166,7 +166,7 @@ Chaque commande est traitée avec sérieux, respect et ponctualité, car chez no
 <section id="contact" class="section">
 <h2 style="text-align:center;color:#d35400;"> Contactez-nous</h2>
 <div style="text-align:center;font-size:1.1rem;line-height:2;">
-<p><strong>📱 Téléphone :</strong> +227 89 45 03 64</p>
+<p><strong>📱 Téléphone :</strong> +227 89 45 03 64 ou 91 91 55 09</p>
 <p><strong>🛒 Commandes :</strong> 24h/24 et 7j/7</p>
 <p><strong>🚚 Heures de livraison :</strong> 6h - 10h et 17h - 23h</p>
 <p><strong>📍 Zone de livraison :</strong> Niamey et environs</p>
@@ -182,7 +182,30 @@ Chaque commande est traitée avec sérieux, respect et ponctualité, car chez no
 </div>
 
 </section>
-
+<section class="section" style="background:#fff8f0;">
+    <h2 style="text-align:center;color:#d35400;margin-bottom:20px;">💬 Laissez-nous votre avis</h2>
+    <p style="text-align:center;color:#666;margin-bottom:25px;">Votre satisfaction nous tient à cœur ! Partagez votre expérience.</p>
+    
+    <form action="avis.php" method="POST" style="max-width:600px;margin:0 auto;">
+        <input type="text" name="nom_avis" placeholder="Votre nom" required>
+        
+        <div style="text-align:center;margin:15px 0;">
+            <label style="display:block;margin-bottom:10px;font-weight:bold;color:#d35400;">Votre note :</label>
+            <select name="note" required style="width:100%;padding:12px;font-size:1.1rem;">
+                <option value="">-- Choisissez --</option>
+                <option value=""> Excellent</option>
+                <option value=""> Très bien</option>
+                <option value=""> Bien</option>
+                <option value=""> Moyen</option>
+                <option value=""> Insatisfait</option>
+            </select>
+        </div>
+        
+        <textarea name="commentaire" placeholder="Votre commentaire..." rows="4" required></textarea>
+        
+        <button type="submit">Envoyer mon avis</button>
+    </form>
+</section>
 <footer>
 <p>&copy; 2025 My BreadExpress - La livraison de pain révolutionnaire au Niger</p>
 <p style="margin-top:10px;font-size:0.9rem;">Fondé par Amadou Moussa Ridouane • Technicien Supérieur en Génie Logiciel à EMIG</p>

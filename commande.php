@@ -50,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $encodedMessage = urlencode($message);
         
-        header("Location: https://wa.me/22789450364?text=" . $encodedMessage);
+        header("Location: https://wa.me/22791915509?text=" . $encodedMessage);
         exit();
     } catch(PDOException $e) {
         echo "Erreur : " . $e->getMessage();
