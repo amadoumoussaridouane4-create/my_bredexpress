@@ -8,8 +8,29 @@
 </head>
 <body>
 <header>
-<h1>🥖 My BreadExpress</h1>
+<h1><img src="mon_logo.jpg" alt="My BreadExpress" style="max-width:200px;height:auto;"></h1>
 <p>Votre pain chaud livré en un clic !</p>
+<style>
+.pain-option {
+    transition: all 0.3s ease;
+}
+
+.pain-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(211, 84, 0, 0.3);
+}
+
+.pain-option input:checked + img {
+    border: 3px solid #27ae60;
+}
+
+.pain-option:has(input:checked) {
+    border-color: #27ae60 !important;
+    background: #e8f8f5;
+    box-shadow: 0 5px 20px rgba(39, 174, 96, 0.4);
+}
+</style>
+
 </header>
 
 <nav>
@@ -91,12 +112,25 @@
 <form action="commande.php" method="POST">
 <input type="text" name="nom" placeholder="Nom complet" required>
 <input type="tel" name="tel" placeholder="Téléphone (ex: 89450364)" required>
-<select name="pain" required>
-<option value="">-- Choisissez votre pain --</option>
-<option>Baguette</option>
-<option>Pain long</option>
-<option>Pain rond</option>
-</select>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin:10px 0;">
+    <label style="cursor:pointer;border:3px solid #ddd;border-radius:10px;padding:10px;text-align:center;transition:0.3s;" class="pain-option">
+        <input type="radio" name="pain" value="Baguette" required style="display:none;">
+        <img src="baguette.jpg" alt="Baguette" style="width:100%;height:120px;object-fit:cover;border-radius:8px;">
+        <p style="margin-top:10px;font-weight:bold;color:#d35400;">Baguette</p>
+    </label>
+    
+    <label style="cursor:pointer;border:3px solid #ddd;border-radius:10px;padding:10px;text-align:center;transition:0.3s;" class="pain-option">
+        <input type="radio" name="pain" value="Pain long" required style="display:none;">
+        <img src="pain_long.jpg" alt="Pain long" style="width:100%;height:120px;object-fit:cover;border-radius:8px;">
+        <p style="margin-top:10px;font-weight:bold;color:#d35400;">Pain long</p>
+    </label>
+    
+    <label style="cursor:pointer;border:3px solid #ddd;border-radius:10px;padding:10px;text-align:center;transition:0.3s;" class="pain-option">
+        <input type="radio" name="pain" value="Pain rond" required style="display:none;">
+        <img src="pain_rond.jpg" alt="Pain rond" style="width:100%;height:120px;object-fit:cover;border-radius:8px;">
+        <p style="margin-top:10px;font-weight:bold;color:#d35400;">Pain rond</p>
+    </label>
+</div>
 <input type="number" name="qte" min="1" placeholder="Quantité" required>
 <input type="hidden" name="adresse" id="adresse" value="">
 <input type="hidden" name="latitude" id="latitude" value="">
