@@ -211,4 +211,34 @@ footer p {
 
 button:hover {
     animation: pulse 1s infinite;
+    /* Indicateur de scroll pour navigation mobile */
+@media (max-width: 768px) {
+    nav {
+        position: relative;
+    }
+    
+    nav::after {
+        content: "→";
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255,255,255,0.8);
+        font-size: 1.5rem;
+        animation: slideHint 1.5s infinite;
+        pointer-events: none;
+    }
+    
+    @keyframes slideHint {
+        0%, 100% { 
+            transform: translateY(-50%) translateX(0);
+            opacity: 0.5;
+        }
+        50% { 
+            transform: translateY(-50%) translateX(8px);
+            opacity: 1;
+        }
+    }
+}
+
 }
