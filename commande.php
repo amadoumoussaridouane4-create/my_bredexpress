@@ -34,11 +34,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Construire le message avec coordonnées GPS si disponibles
         $message = "🟢 NOUVELLE COMMANDE - My BredExpress\n";
-        $message .= "👤 Client : $nom\n";
-        $message .= "📞 Tel : $tel\n";
-        $message .= "🥖 Pain : $pain\n";
-        $message .= "🔢 Quantité : $qte\n";
-        $message .= "💰 Total : $total FCFA (Pain: $total_pain + Livraison: $frais_livraison)\n";
+        $message .= " Client : $nom\n";
+        $message .= " Tel : $tel\n";
+        $message .= " Pain : $pain\n";
+        $message .= " Quantité : $qte\n";
+        $message .= " Total : $total FCFA (Pain: $total_pain + Livraison: $frais_livraison)\n";
         $message .= "📍 Adresse : $adresse\n";
         
         // Ajouter lien Google Maps si GPS disponible
@@ -46,7 +46,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message .= "🗺️ Localisation GPS : https://www.google.com/maps?q=$latitude,$longitude\n";
         }
         
-        $message .= "💵 Paiement : À la livraison";
+        $message .= " Paiement : À la livraison";
         
         $encodedMessage = urlencode($message);
         
