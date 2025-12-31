@@ -105,6 +105,39 @@
 </div>
 </div>
 </section>
+<section class="section" style="background:#fff8f0;">
+    <h2 style="text-align:center;color:#d35400;margin-bottom:30px;">🥖 Nos Pains Frais Disponibles</h2>
+    <p style="text-align:center;color:#666;margin-bottom:30px;">Choisissez parmi notre sélection de pains fraîchement préparés</p>
+    
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;max-width:900px;margin:0 auto;">
+        <div style="background:white;border-radius:15px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+            <img src="baguette.jpg" alt="Baguette" style="width:100%;height:200px;object-fit:cover;">
+            <div style="padding:20px;text-align:center;">
+                <h3 style="color:#d35400;margin-bottom:10px;">Baguette</h3>
+                <p style="color:#666;font-size:0.9rem;">Pain croustillant et savoureux</p>
+                <p style="color:#27ae60;font-weight:bold;font-size:1.2rem;margin-top:10px;">200 FCFA</p>
+            </div>
+        </div>
+        
+        <div style="background:white;border-radius:15px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+            <img src="pain_long.jpg" alt="Pain long" style="width:100%;height:200px;object-fit:cover;">
+            <div style="padding:20px;text-align:center;">
+                <h3 style="color:#d35400;margin-bottom:10px;">Pain Long</h3>
+                <p style="color:#666;font-size:0.9rem;">Idéal pour toute la famille</p>
+                <p style="color:#27ae60;font-weight:bold;font-size:1.2rem;margin-top:10px;">200 FCFA</p>
+            </div>
+        </div>
+        
+        <div style="background:white;border-radius:15px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+            <img src="pain_rond.jpg" alt="Pain rond" style="width:100%;height:200px;object-fit:cover;">
+            <div style="padding:20px;text-align:center;">
+                <h3 style="color:#d35400;margin-bottom:10px;">Pain Rond</h3>
+                <p style="color:#666;font-size:0.9rem;">Moelleux et délicieux</p>
+                <p style="color:#27ae60;font-weight:bold;font-size:1.2rem;margin-top:10px;">200 FCFA</p>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="commande" class="section">
 <h2 style="text-align:center;color:#d35400;">📝 Commander votre pain maintenant</h2>
@@ -112,25 +145,12 @@
 <form action="commande.php" method="POST">
 <input type="text" name="nom" placeholder="Nom complet" required>
 <input type="tel" name="tel" placeholder="Téléphone (ex: 89450364)" required>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin:10px 0;">
-    <label style="cursor:pointer;border:3px solid #ddd;border-radius:10px;padding:10px;text-align:center;transition:0.3s;" class="pain-option">
-        <input type="radio" name="pain" value="Baguette" required style="display:none;">
-        <img src="baguette.jpg" alt="Baguette" style="width:100%;height:120px;object-fit:cover;border-radius:8px;">
-        <p style="margin-top:10px;font-weight:bold;color:#d35400;">Baguette</p>
-    </label>
-    
-    <label style="cursor:pointer;border:3px solid #ddd;border-radius:10px;padding:10px;text-align:center;transition:0.3s;" class="pain-option">
-        <input type="radio" name="pain" value="Pain long" required style="display:none;">
-        <img src="pain_long.jpg" alt="Pain long" style="width:100%;height:120px;object-fit:cover;border-radius:8px;">
-        <p style="margin-top:10px;font-weight:bold;color:#d35400;">Pain long</p>
-    </label>
-    
-    <label style="cursor:pointer;border:3px solid #ddd;border-radius:10px;padding:10px;text-align:center;transition:0.3s;" class="pain-option">
-        <input type="radio" name="pain" value="Pain rond" required style="display:none;">
-        <img src="pain_rond.jpg" alt="Pain rond" style="width:100%;height:120px;object-fit:cover;border-radius:8px;">
-        <p style="margin-top:10px;font-weight:bold;color:#d35400;">Pain rond</p>
-    </label>
-</div>
+<select name="pain" required>
+    <option value="">-- Choisissez votre pain --</option>
+    <option>Baguette</option>
+    <option>Pain long</option>
+    <option>Pain rond</option>
+</select>
 <input type="number" name="qte" min="1" placeholder="Quantité" required>
 <input type="hidden" name="adresse" id="adresse" value="">
 <input type="hidden" name="latitude" id="latitude" value="">
